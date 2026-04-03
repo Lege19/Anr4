@@ -1,0 +1,6 @@
+[submodule "website/solid-chartjs"]
+	path = website/solid-chartjs
+	url = git@github.com:Lege19/solid-chartjs.git
+[submodule "sqlx"]
+	path = sqlx
+	url = git@github.com:Lege19/sqlx

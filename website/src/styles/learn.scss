@@ -1,0 +1,94 @@
+@use "mixins.scss";
+
+#learn-view {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  #home-button,
+  #feedback-settings {
+    position: absolute;
+  }
+  #home-button {
+    top: 0;
+    left: 0;
+  }
+  #feedback-settings {
+    bottom: 0;
+    right: 0;
+  }
+
+  form {
+    .question-container {
+      position: relative;
+      .question-label {
+        display: block;
+        text-align: center;
+      }
+      .answer-row {
+        @extend %std-flex;
+        margin-top: var(--gap);
+        & > :first-child {
+          flex-grow: 1;
+        }
+      }
+      .correct-answer {
+        height: 0;
+        width: 100%;
+        text-align: center;
+        position: absolute;
+        bottom: -0.5em;
+        color: darkred;
+      }
+    }
+  }
+
+  // Make the text area transparent so the corrections are visible
+  textarea {
+    background-color: transparent;
+    position: relative;
+    z-index: 1;
+  }
+  .mistake-highlighter {
+    @extend %textarea-text-style;
+    white-space: pre;
+    position: absolute;
+    pointer-events: none;
+    inset: 0;
+    color: transparent;
+    span {
+      // insertion
+      &.mistake-highlight-i {
+        background-color: lightblue;
+      }
+      // transposition
+      &.mistake-highlight-t {
+        background-color: lightgreen;
+      }
+      // substitution
+      &.mistake-highlight-s {
+        background-color: yellow;
+      }
+      // deletion
+      &.mistake-highlight-d {
+        outline: solid 2px pink;
+      }
+    }
+  }
+}
+
+%textarea-text-style {
+  font-size: 1rem;
+  font-family: Arial;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+textarea.multilingual-input {
+  @extend %textarea-text-style;
+  border: none;
+  resize: none;
+  outline: none;
+  margin: 0;
+  padding: 0;
+}

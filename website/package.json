@@ -1,0 +1,48 @@
+{
+  "name": "vocab",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint --fix",
+    "preview": "vite preview",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@kobalte/core": "^0.13.11",
+    "@solidjs/router": "^0.15.4",
+    "chart.js": "^4.5.1",
+    "chartjs-adapter-date-fns": "^3.0.0",
+    "date-fns": "^4.1.0",
+    "decoders": "^2.9.1",
+    "jwt-decode": "^4.0.0",
+    "solid-chartjs": "file:solid-chartjs",
+    "solid-heroicons": "^3.2.4",
+    "solid-js": "^1.9.11"
+  },
+  "devDependencies": {
+    "@solid-devtools/overlay": "^0.33.5",
+    "@types/node": "^24.12.0",
+    "@typescript-eslint/parser": "^8.57.2",
+    "eslint": "^9.39.4",
+    "eslint-plugin-solid": "^0.14.5",
+    "globals": "^16.5.0",
+    "jsdom": "^27.4.0",
+    "prettier": "^3.8.1",
+    "sass": "^1.98.0",
+    "solid-devtools": "^0.34.5",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.57.2",
+    "vite": "^6.4.1",
+    "vite-plugin-solid": "^2.11.11",
+    "vitest": "^3.2.4"
+  },
+  "pnpm": {
+    "overrides": {
+      "seroval@<=1.4.0": ">=1.4.1",
+      "seroval@<1.4.1": ">=1.4.1"
+    }
+  }
+}

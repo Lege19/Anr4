@@ -1,0 +1,34 @@
+@use "sass:color";
+
+:root {
+  --gap: 0.5rem;
+
+  --background-color: white;
+  --text-color: black;
+
+  --border-width: 0.1rem;
+  --border-color: black;
+}
+
+// extra indirection using sass variables in case I decide not to use css variables
+$gap: var(--gap);
+$background-color: var(--background-color);
+$text-color: var(--text-color);
+$border-width: var(--border-width);
+$border-color: var(--border-color);
+
+%std-flex {
+  display: flex;
+  gap: $gap;
+}
+
+%std-border {
+  border: $border-width solid $border-color;
+}
+
+.panel {
+  @extend %std-border;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  background-color: $background-color;
+}

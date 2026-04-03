@@ -1,0 +1,119 @@
+@use "mixins.scss";
+@use "sass:color";
+
+#student-home-view {
+  @extend %std-flex;
+
+  height: 100%;
+
+  flex-direction: column;
+  align-items: stretch;
+
+  #student-home {
+    width: 100%;
+  }
+
+  #top-row,
+  #bottom-row {
+    @extend %std-flex;
+
+    flex: 1 1 50%;
+  }
+  #bottom-row {
+    // prevent long topic list making bottom row fill whole screen
+    max-height: 50%;
+  }
+
+  #top-row {
+    // chart-js containers mustn't be effected by the width of the chart-js canvas
+    min-height: 0;
+  }
+  #trajectory-panel {
+    flex: 1 1 60%;
+    // chart-js containers mustn't be effected by the width of the chart-js canvas
+    min-width: 0;
+    min-height: 0;
+  }
+  #leaderboard-panel {
+    flex: 1 1 40%;
+  }
+
+  #topic-selector-panel {
+    flex: 1 1 30%;
+    @extend %std-flex;
+    flex-direction: column;
+    & > h3 {
+      margin: 0;
+    }
+  }
+  #study-goals-panel {
+    flex: 1 1 40%;
+  }
+  #start-button {
+    aspect-ratio: 1;
+    border-radius: 50%;
+    @extend .panel;
+
+    font-weight: bold;
+    color: unset;
+    text-align: center;
+    align-content: center;
+    text-decoration: none;
+  }
+
+  .topic-selector {
+    @extend %std-flex;
+    flex-direction: column;
+    height: 100%;
+    ul {
+      padding: 0;
+      margin: 0;
+      @extend %std-flex;
+      flex-direction: column;
+      overflow: scroll;
+    }
+    li::marker {
+      content: none;
+    }
+    .topic-option {
+      $margin: 1rem;
+      margin-right: $margin;
+      border-left-style: solid;
+      border-left-color: color.scale(black, $alpha: -80%);
+      border-left-width: 0;
+      transition:
+        border-left-width 0.1s,
+        padding-left 0.1s,
+        margin-right 0.1s;
+      &[data-selected] {
+        border-left-width: calc($margin - 0.2rem);
+        padding-left: 0.2rem;
+        margin-right: 0;
+      }
+    }
+  }
+
+  .study-goals-container {
+    display: flex;
+    justify-content: stretch;
+    align-content: stretch;
+    padding: var(--border-width);
+    gap: var(--border-color);
+
+    & > * {
+      flex: 1 1 50%;
+    }
+    & > :nth-child(1) {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      border-width: 0;
+      outline: solid 0.1rem var(--border-color);
+    }
+    & > :nth-child(2) {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      border-width: 0;
+      outline: solid 0.1rem var(--border-color);
+    }
+  }
+}

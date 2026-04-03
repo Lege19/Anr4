@@ -1,0 +1,123 @@
+@use "mixins.scss";
+@use "sass:color";
+@use "learn.scss";
+@use "student-home.scss";
+:root {
+  font-size: 2em;
+  font-family: Arial;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+}
+body {
+  margin: 0;
+  padding: 1em;
+  box-sizing: border-box;
+}
+
+input {
+  @extend .panel;
+  font-size: 1em;
+  border-radius: 1em;
+  padding-inline-start: 0.7rem;
+  padding-inline-end: 0.7rem;
+}
+
+button {
+  @extend .panel;
+  font-size: 1em;
+}
+
+form#login-form {
+  @extend %std-flex;
+  flex-direction: column;
+  align-items: start;
+  label {
+    display: block;
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.dialog {
+  // Approximately copied from the Kobalte reference guide
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .overlay,
+  .content {
+    animation: fadeOut 0.2s ease forwards;
+    &[data-expanded] {
+      animation: fade 0.2s ease;
+    }
+  }
+
+  .overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    background-color: rgb(0 0 0 / 0.2);
+  }
+  .content {
+    z-index: 50;
+    max-width: min(calc(100vw - 16px), 500px);
+  }
+}
+
+%pill {
+  border-radius: 1e100px;
+  box-shadow: inset 0px 0px 0px 0.1rem var(--border-color);
+}
+.segmented-control {
+  // .segmented-control must be positioned so that the absolutely positioned indicator is relative to this element
+  position: relative;
+  .items {
+    @extend %pill;
+    display: flex;
+    justify-content: space-around;
+    height: min-content;
+    .item {
+      flex-grow: 1;
+      padding: 0.2rem;
+      text-align: center;
+      .item-label {
+        display: block;
+        width: 100%;
+        cursor: pointer;
+      }
+    }
+  }
+  .indicator {
+    @extend %pill;
+    position: absolute;
+    transition:
+      opacity 500ms ease-in-out,
+      box-shadow 100ms ease-in-out,
+      width 200ms ease,
+      height 200ms ease,
+      transform 200ms ease;
+  }
+}

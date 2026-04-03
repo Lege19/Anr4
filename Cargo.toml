@@ -1,0 +1,63 @@
+[package]
+name = "vocab"
+version = "0.1.0"
+edition = "2024"
+
+[workspace]
+exclude = ["sqlx"]
+
+[dependencies]
+# sqlx = { version = "0.8.5", default-features = false, features = ["sqlite", "macros", "runtime-tokio"] }
+# Verison of sqlx with my Rowid aliasing fix. See PR #4088
+sqlx = { path = "sqlx", default-features = false, features = ["sqlite", "macros", "runtime-tokio"] }
+
+# feature macros needed for async main
+# feature signal needed for waiting for ctrl-c
+tokio = { version = "1.44.2", default-features = false, features = ["macros", "rt-multi-thread", "signal"] }
+
+# feature tokio needed for creating a server
+# feature form needed for recieving google oauth tokens as a url encoded form
+# feature debug_handler needed for debug_handler macro
+axum = { version = "0.8.4", default-features = false, features = ["tokio", "http1", "http2", "form", "macros", "json"] }
+thiserror = { version = "2.0.12", default-features = false }
+
+# feature cookie needed for storing user tokens in cookies
+axum-extra = { version = "0.10.1", default-features = false, features = ["cookie"] }
+
+# feature tls-rustls needed for using rustls for ssl
+axum-server = { version = "0.7.2", default-features = false, features = ["tls-rustls"] }
+
+# features registry and std needed for registry creation
+# feature fmt needed for error logging
+# feature env-filter needed for filtering events
+tracing-subscriber = { version = "0.3.19", default-features = false, features = ["registry", "std", "fmt", "env-filter"] }
+tracing = { version = "0.1.41", default-features = false }
+
+# feature fs needed for serving a static directory
+# feature trace needed for logging requests
+tower-http = { version = "0.6.6", default-features = false, features = ["fs", "trace"] }
+serde = { version = "1.0.219", default-features = false }
+serde_json = { version = "1.0.148", default-features = false }
+serde_iter = { version = "0.1.1", default-features = false, features = ["seq"] }
+
+# type safe CSP
+axum-csp = "0.0.10"
+
+# vite integration
+vite-rs = "0.2.1"
+vite-rs-axum-0-8 = "0.2.1"
+
+# handles password hashing and salting
+password-auth = "1.0.0"
+
+# used in JWT and user token handling {
+rand_core = { version = "0.9.3", default-features = false, features = ["os_rng"] }
+base64 = { version = "0.22.1", default-features = false }
+sha2 = "0.10.9"
+time = { version = "0.3.44", default-features = false, features = ["serde"] }
+jwt = { version = "0.16.0", default-features = false }
+hmac = "0.12.1"
+libsqlite3-sys = "0.35.0"
+
+[profile.dev.package."*"]
+opt-level = 3
